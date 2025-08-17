@@ -1,7 +1,7 @@
 services:
   db:
     image: postgres:latest
-    container_name: my_db_prisma
+    container_name: my_db_prisma_s2_68
     environment:
       POSTGRES_USER: ${DATABASE_USER}
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
