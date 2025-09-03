@@ -15,5 +15,15 @@ app.get("/profile", async (c) => {
         data: profiles
     }, 200);
 });
+app.post("/profile", async (c) => {
+    //logic to create a new profile
+    const body = await c.req.json();
+    console.log('input of profile ', body);
+
+    //output response
+    return c.json({
+        message: "create profile completed"
+    });
+});
 
 export default app;
