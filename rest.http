@@ -9,4 +9,10 @@ GET http://localhost:3000/profile
 POST http://localhost:3000/profile
 Content-Type: application/json
 
-{}
+
+{
+    "username": "demo",
+    "password": "1234",
+    "mobile": "0999999999",
+    "cardId": "1234567890123"
+}
