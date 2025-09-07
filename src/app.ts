@@ -1,6 +1,7 @@
 import { Hono } from "hono";
 import { PrismaClient } from "@prisma/client";
 import * as bcrypt from "bcrypt";
+import { Md5 } from "md5-typescript";
 
 const prisma = new PrismaClient();
 
@@ -33,10 +34,17 @@ app.post("/profile", async (c) => {
     body.password = passwordHash;
     // console.log('body.password(replace) ', body);
 
-    // c.status(503);
+    //encode mobile
+    body.mobile = Md5.init(body.mobile);
+
+    //encode cardId
+    body.cardId = Md5.init(body.cardId);
+
+    //data before save
+    console.log('data before save ', body);
     // return c.json({
-    //     message: "service unavailable for demo",
-    //     data: "server error"
+    //     message: "data before save",
+    //     data: body
     // });
     
     //save to db

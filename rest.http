@@ -10,10 +10,10 @@ POST http://localhost:3000/profile
 Content-Type: application/json
 
 {
-    "username": "demo5",
+    "username": "demo7",
     "password": "1234",
-    "mobile": "0999999995",
-    "cardId": "1234567890120"
+    "mobile": "0999999994",
+    "cardId": "1234567890119"
 }
 
 ### Get some profile by id
