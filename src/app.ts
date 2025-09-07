@@ -61,5 +61,21 @@ app.post("/profile", async (c) => {
         data: result
     });
 });
+app.get("/profile/:id", async (c) => {
+    //get some data from db
+    const id = c.req.param('id');
+    console.log('id ', id);
+    const profile = await prisma.profile.findFirstOrThrow({
+        where: {
+            id: id
+        }
+    });
+    delete profile.password;
+
+    return c.json({
+        message: "get data completed",
+        data: profile
+    }, 200);
+});
 
 export default app;
