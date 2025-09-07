@@ -27,12 +27,24 @@ app.post("/profile", async (c) => {
     console.log('hash.password(after) ', passwordHash);
     body.password = passwordHash;
     console.log('body.password(replace) ', body);
+
+    // c.status(503);
+    // return c.json({
+    //     message: "service unavailable for demo",
+    //     data: "server error"
+    // });
     
     //save to db
     body.status= false;
     const result = await prisma.profile.create({
         data: body
+    })
+    .then(data => {
+        console.log('create profile completed', data);
+        delete data.password;
+        return data;
     });
+    // .catch();
 
     //output response
     return c.json({
