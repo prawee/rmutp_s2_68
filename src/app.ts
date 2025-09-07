@@ -19,14 +19,14 @@ app.get("/profile", async (c) => {
 app.post("/profile", async (c) => {
     //logic to create a new profile
     const body = await c.req.json();
-    console.log('input of profile ', body);
-    console.log('body.password(original) ', body.password);
+    // console.log('input of profile ', body);
+    // console.log('body.password(original) ', body.password);
 
     //encode password
     const passwordHash = await bcrypt.hash(body.password, 13);
-    console.log('hash.password(after) ', passwordHash);
+    // console.log('hash.password(after) ', passwordHash);
     body.password = passwordHash;
-    console.log('body.password(replace) ', body);
+    // console.log('body.password(replace) ', body);
 
     // c.status(503);
     // return c.json({
@@ -39,12 +39,16 @@ app.post("/profile", async (c) => {
     const result = await prisma.profile.create({
         data: body
     })
-    .then(data => {
-        console.log('create profile completed', data);
+    .then(data => { 
         delete data.password;
+        console.log('create profile completed', data);
         return data;
+    })
+    .catch(err => {
+        console.log(`create profile failed `, JSON.stringify(err?.message));
+        // switch case error message
+        return "please recheck username, mobile or cardId";
     });
-    // .catch();
 
     //output response
     return c.json({
