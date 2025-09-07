@@ -10,6 +10,11 @@ app.get("/", (c) => c.text("Hello World Today!"));
 app.get("/profile", async (c) => {
     //get data from db
     const profiles = await prisma.profile.findMany();
+
+    profiles.forEach(data => {
+        delete data.password;
+    });
+
     //response
     return c.json({
         message: "get data completed",
