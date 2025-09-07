@@ -4,8 +4,8 @@
     "@prisma/client": "^6.13.0",
     "bcrypt": "^6.0.0",
     "hono": "^4.9.2",
-    "prisma": "^6.13.0",
-    "ts-md5": "^2.0.1"
+    "md5-typescript": "^1.0.5",
+    "prisma": "^6.13.0"
   },
   "devDependencies": {
     "@types/bcrypt": "^6.0.0",
