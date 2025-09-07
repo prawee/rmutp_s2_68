@@ -77,5 +77,29 @@ app.get("/profile/:id", async (c) => {
         data: profile
     }, 200);
 });
+app.post("/login", async (c) => {
+    const body = await c.req.json();
+    console.log('input of login ', body);
+
+    // process ?
+    // 1. find user by username
+    const user = await prisma.profile.findUnique({
+        select: { password: true },
+        where: {
+            username: body.username
+        }
+    });
+    console.log('user info ', user);
+    // 2. compare password
+    const userPassword = await bcrypt.hash(user?.password ?? '', 13);
+    const isMatch = await bcrypt.compare(body.password, user?.password ?? '');
+    console.log('isMatch ', isMatch);
+    return c.json({
+        message: "login completed",
+        data: isMatch,
+        user: user?.password,
+        hash: userPassword
+    });
+});
 
 export default app;
